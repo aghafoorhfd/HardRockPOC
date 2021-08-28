@@ -33,5 +33,4 @@ jobs:
          known_hosts: 18.216.193.118
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-      - name: Deploy with rsync
-        run: rsync --progress -avz -e 'ssh -v -i ./.ssh/known_hosts':/var/www/html/HardRockPOC/
+
