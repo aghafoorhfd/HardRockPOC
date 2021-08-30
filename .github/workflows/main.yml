@@ -30,9 +30,8 @@ jobs:
                 host: ${{secrets.SSH_HOST}}
                 key: ${{secrets.SSH_KEY}}  
                 username: ${{secrets.SSH_USERNAME}}  
-  script: |
-          mkdir test
-          cd test
-          git clone git@github.com:aghafoorhfd/HardRockPOC.git
-          
-
+                script: |
+                   mkdir test
+                   cd test
+                   git clone git@github.com:aghafoorhfd/HardRockPOC.git
+                   echo     'OK'
