@@ -24,14 +24,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Deploy NodeJS app
-        uses: appleboy/ssh-action@v0.1.2
+      - name: ls -a via ssh
+        uses: fifsky/ssh-action@master
         with:
-                host: ${{secrets.SSH_HOST}}
-                key: ${{secrets.SSH_KEY}}  
-                username: ${{secrets.SSH_USERNAME}}  
-                script: |
-                   mkdir test
-                   cd test
-                   git clone git@github.com:aghafoorhfd/HardRockPOC.git
-                   echo     'OK'
+              command: |
+               cd /tmp
+               ls -a
+              host: ${{ secrets.SSH_HOST }}
+              user: root
+              key: ${{ secrets.SSH_KEY}}
