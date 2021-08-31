@@ -1,0 +1,6344 @@
+openapi: 3.0.0
+info:
+  title: Unity Web Experience API
+  description: Unity Web Experience API
+  version: 1.0.0
+servers:
+ -
+  url: http://unity-api.shrss.com/unity-web-exp/v1
+  description: Production server
+ -
+  url: http://unity-api-stage.shrss.com/unity-web-exp/v1
+  description: Staging server for testing
+ -
+  url: http://unity-api-train.shrss.com/unity-web-exp/v1
+  description: Training server for training
+ -
+  url: http://unity-api-qa.shrss.com/unity-web-exp/v1
+  description: QA server for testing
+ -
+  url: http://unity-api-dev.shrss.com/unity-web-exp/v1
+  description: Dev server for testing
+security:
+ -
+  default: []
+paths:
+  /profile/{profile-id}:
+    get:
+      tags:
+       - Profile
+      summary: Get Profile Summary
+      description: Get Profile Summary
+      operationId: getProfileSummary
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/personal-information:
+    put:
+      tags:
+       - Profile
+      summary: Update Personal Information
+      description: Update Personal Information
+      operationId: updatePersonalInformation
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePersonalInformation'
+        required: true
+      responses:
+        200:
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/account-security:
+    put:
+      tags:
+       - Profile
+      summary: Update Online Account Security Information
+      description: Update Online Account Security Information
+      operationId: updateAccountSecurityInformation
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: user-id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnlineAccountUpdateDto'
+        required: true
+      responses:
+        200:
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/preference/global/default:
+    get:
+      tags:
+       - Preference
+      summary: Get the default global preference
+      description: Get the default global preference
+      operationId: getDefaultPreference
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultGlobalPreferenceResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false        
+  /profile/{profile-id}/preference:
+    get:
+      tags:
+       - Preference
+      summary: Get Preference
+      description: Get Preference
+      operationId: getPreference
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreferenceResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+    put:
+      tags:
+       - Preference
+      summary: Update Preference
+      description: Update Preference
+      operationId: updatePreference
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: account-number
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreferenceRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreferenceResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/opt-out:
+    put:
+      tags:
+       - Preference
+      summary: Unsubscribe All Preference
+      description: Unsubscribe All Preference
+      operationId: optOutPreference
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: account-number
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreferenceResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/gaming/{account-number}/unity-point:
+    get:
+      tags:
+       - Dashboard
+      summary: Get Unity Point
+      description: Get Unity Point
+      operationId: getUnityPoint
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: account-number
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnityPoint'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/gaming/{account-number}/free-play:
+    get:
+      tags:
+       - Dashboard
+      summary: Get Free Play Details
+      description: Returns Free Play Details
+      operationId: getFreePlayDetails
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: account-number
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreePlay'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/offer:
+    description: Get all available offers with filters for date, property, and offer type
+    post:
+      tags:
+       - Offers
+      summary: Get all Offers
+      description: Get all Offers
+      operationId: getAllOffers
+      parameters:
+       -
+        name: profile-id
+        in: path
+        description: Profile id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: account-number
+        in: query
+        description: Patron's Rewards number
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: x-Correlation-Id
+        in: header
+        description: GUID provided by consumer to be able to "group" calls together
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOffersRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllOffersSuccess'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/offer/{offer-id}:
+    description: Get Specific Offer Details
+    get:
+      tags:
+       - Offers
+      summary: Get Specific Offer Details
+      description: Get Specific Offer Details
+      operationId: getSpecificOfferDetails
+      parameters:
+       -
+        name: profile-id
+        in: path
+        description: Profile id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: offer-id
+        in: path
+        description: Offer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: account-number
+        in: query
+        description: Patron's Rewards number
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: x-Correlation-Id
+        in: header
+        description: GUID provided by consumer to be able to "group" calls together
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOfferDetailsSuccess'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+    put:
+      tags:
+       - Offers
+      summary: Modify a Specific Offer
+      description: Modify a Specific Offer
+      operationId: modifySpecificOffer
+      parameters:
+       -
+        name: profile-id
+        in: path
+        description: Profile id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: offer-id
+        in: path
+        description: Offer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: account-number
+        in: query
+        description: Patron's Rewards number
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: x-Correlation-Id
+        in: header
+        description: GUID provided by consumer to be able to "group" calls together
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RedeemOfferRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false  
+  /profile/{profile-id}/offer/summary:
+    description: Summary API to do the filtering of the offers
+    post:
+      tags:
+       - Offers
+      summary: Get Offer Summary
+      description: Get Offer Summary
+      operationId: getOfferSummary
+      parameters:
+       -
+        name: profile-id
+        in: path
+        description: Profile id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: account-number
+        in: query
+        description: Patron's Rewards number
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: x-Correlation-Id
+        in: header
+        description: GUID provided by consumer to be able to "group" calls together
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOfferSummaryRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOfferSummaryResponse'
+  /profile/{profile-id}/reservation:
+    description: Get All Reservations with filters for date, property, and reservation type
+    post:
+      tags:
+       - Offers
+      summary: Get All Reservations
+      description: Get All Reservations
+      operationId: getAllReservations
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: account-number
+        in: query
+        description: Patron's Account number
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetReservationsRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllReservationsSuccess'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/reservation/summary:
+    description: Get Reservation Summary with filters for date, property, and reservation type
+    post:
+      tags:
+       - Offers
+      summary: Get Reservation Summary
+      description: Get Reservation Summary
+      operationId: getReservationSummary
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: account-number
+        in: query
+        description: Patron's Account number
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetReservationSummaryRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReservationSummaryResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/offer/{offer-id}/reserve:
+    description: Reserve a Specific Offer
+    post:
+      tags:
+       - Offers
+      summary: Reserve a Specific Offer
+      description: Reserve a Specific Offer
+      operationId: reserveSpecificOffer
+      parameters:
+       -
+        name: profile-id
+        in: path
+        description: Profile id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: offer-id
+        in: path
+        description: Offer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: account-number
+        in: query
+        description: Patron's Account number
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: x-Correlation-Id
+        in: header
+        description: GUID provided by consumer to be able to "group" calls together
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/offer/{offer-id}/cancel:
+    description: Cancel a Specific Offer
+    post:
+      tags:
+       - Offers
+      summary: Cancel a Specific Offer
+      description: Cancel a Specific Offer
+      operationId: cancelSpecificOffer
+      parameters:
+       -
+        name: profile-id
+        in: path
+        description: Profile id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: offer-id
+        in: path
+        description: Offer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: account-number
+        in: query
+        description: Patron's Account number
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: x-Correlation-Id
+        in: header
+        description: GUID provided by consumer to be able to "group" calls together
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferUnreserveRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/offer/{offer-id}/redeem:
+    description: Redeem a Specific Offer
+    post:
+      tags:
+       - Offers
+      summary: Redeem a Specific Offer
+      description: Redeem a Specific Offer
+      operationId: redeemSpecificOffer
+      parameters:
+       -
+        name: profile-id
+        in: path
+        description: Profile id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: offer-id
+        in: path
+        description: Offer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: account-number
+        in: query
+        description: Patron's Account number
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: x-Correlation-Id
+        in: header
+        description: GUID provided by consumer to be able to "group" calls together
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RedeemOfferRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+
+  /profile/{profile-id}/gaming/{account-number}/transaction/history:
+    post:
+      tags:
+       - Transaction
+      summary: Get Transaction History
+      description: Get Transaction History
+      operationId: getTransactionHistory
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: account-number
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionHistoryRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionHistoryResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/gaming/{account-number}/transaction/summary:
+    post:
+      tags:
+       - Transaction
+      summary: Get Transaction History Summary
+      description: Get Transaction History Summary
+      operationId: getTransactionHistorySummary
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: account-number
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionHistorySummaryRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionHistorySummaryResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/gaming/{account-number}/statement:
+    get:
+      tags:
+       - Transaction
+      summary: Get Win/Loss Statement
+      description: Get Win/Loss Statement
+      operationId: getWinLossStatement
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: account-number
+        in: path
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: year
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: property-code
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statement'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/account/{account-number}/validate:
+    post:
+      tags:
+       - Activation
+      summary: Validate Existing Profile
+      description: Validate Existing Profile
+      operationId: validateExistingProfile
+      parameters:
+       -
+        name: account-number
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateExistingProfile'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidAccount'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/account/{account-number}/validate/validate-confirmation-code:
+    post:
+      tags:
+       - Activation
+      summary: Validate the Confirmation Code
+      description: Validate Confirmation Code
+      operationId: validateConfirmationCode
+      parameters:
+       -
+        name: account-number
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateConfirmationCode'
+        required: true
+      responses:
+        200:
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/account/{account-number}/activate:
+    put:
+      tags:
+       - Activation
+      summary: Activate Account
+      description: Update profile with new password
+      operationId: activateAccount
+      parameters:
+       -
+        name: account-number
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/activateAccount'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountActivationSuccess'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/account/{account-number}/activate/resend-email:
+    post:
+      tags:
+       - Activation
+      summary: Resend Activation Email
+      description: Resend Activation Email
+      operationId: resendActivationEmail
+      parameters:
+       -
+        name: account-number
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: user-id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/signup:
+    post:
+      tags:
+       - Signup
+      summary: Signup
+      description: Signup
+      operationId: signup
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupProfile'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignupProfileSuccess'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignupError'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/signup/confirm:
+    post:
+      tags:
+       - Signup
+      summary: Confirm Account
+      description: Confirm Account
+      operationId: confirmAccount
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupConfirm'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignupConfirmSuccess'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/signup/resend-email:
+    post:
+      tags:
+       - Signup
+      summary: Resend Confirmation Email
+      description: Resend Confirmation Email
+      operationId: resendConfirmationEmail
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: user-id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignupResendConfirmEmailSuccess'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/patron/{account-number}:
+    get:
+      tags:
+       - Wallet
+      summary: Get Patron Data For Creating Wallet
+      description: Get Patron Data For Creating Wallet
+      operationId: getPatronDataForCreatingWallet
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: account-number
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPatronDataForWallet'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/wallet/{account-number}/balance:
+    get:
+      tags:
+       - Wallet
+      summary: Get Wallet Balance
+      description: Get Wallet Balance
+      operationId: getWalletBalance
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: account-number
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWalletBalance'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/wallet/{account-number}/access-token:
+    get:
+      tags:
+       - Wallet
+      summary: Get Wallet Access Token
+      description: Get Wallet Access Token
+      operationId: getWalletAccessToken
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: account-number
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWalletAccessToken'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /country:
+    get:
+      tags:
+       - Country & State
+      summary: Get Countries
+      description: Get Countries
+      operationId: getCountries
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountryResponseArray'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /country/{country-code}/state:
+    get:
+      tags:
+       - Country & State
+      summary: Get States
+      description: Get States
+      operationId: getStates
+      parameters:
+       -
+        name: country-code
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateResponseArray'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /validate-email:
+    get:
+      tags:
+       - Validation
+      summary: Validate Email
+      description: Validate Email
+      operationId: validateEmail
+      parameters:
+       -
+        name: value
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Email details are given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailValidationResult'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /property:
+    get:
+      tags:
+       - Property
+      summary: Get Properties By Region and Line of business
+      description: Get Properties By Region and Line of business
+      operationId: getProperties
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: region-code
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: line-of-business
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: display-on-digital
+        in: query
+        description: Display on Digital
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+       -
+        name: primary-location
+        in: query
+        description: Primary Location
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyDetailArrayDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /property/{property-code}:
+    get:
+      tags:
+       - Property
+      summary: Get Property Detail
+      description: Get Property Detail
+      operationId: getPropertyDetail
+      parameters:
+       -
+        name: property-code
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Email details are given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyDetailDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /property/nearby:
+    get:
+      tags:
+       - Property
+      summary: Get Nearby Properties
+      description: Get Nearby Properties
+      operationId: getNearbyProperties
+      parameters:
+       -
+        name: longitude
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: number
+       -
+        name: latitude
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: number
+       -
+        name: radius
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: number
+       -
+        name: limit
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+       -
+        name: line-of-business
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyNearbyArrayDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/property/recommended-for-preferred:
+    get:
+      tags:
+       - Property
+      summary: Get Recommended Properties For Preferred Locations
+      description: Get Recommended Properties For Preferred Locations
+      operationId: getRecommendedPropertiesForPreferredLocations
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyCodeArrayDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/property/recommended-for-opt-in:
+    get:
+      tags:
+       - Property
+      summary: Get Recommended Properties For Opt-In
+      description: Get Recommended Properties For Opt-In
+      operationId: getRecommendedPropertiesForOptin
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyCodeArrayDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /region:
+    get:
+      tags:
+       - Property
+      summary: Get All Region Where Properties Located
+      description: Get All Region Where Properties Located
+      operationId: getAllRegion
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegionArrayDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /property/type:
+    get:
+      tags:
+       - Property
+      summary: Get All Property Types
+      description: Get All Property Types
+      operationId: getAllPropertyTypes
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyTypeArrayDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /property/line-of-business:
+    get:
+      tags:
+       - Property
+      summary: Get All Property Line of Businesses
+      description: Get All Property Line of Businesses
+      operationId: getAllPropertyLineOfBusinesses
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LineOfBusinessArrayDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/patron/{account-number}/hasWallet:
+    get:
+      tags:
+       - Wallet
+      summary: Has Wallet
+      description: Has Wallet
+      operationId: hasWallet
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: account-number
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HasWallet'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /content/application/{application-id}/refresh:
+    post:
+      tags:
+       - Content
+      summary: Refresh Content
+      description: Refresh Content
+      operationId: refreshContent
+      parameters:
+       -
+        name: application-id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      responses:
+        202:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshContentResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/{profile-id}/discover:
+    post:
+      tags:
+       - Discover
+      summary: Discover
+      description: Discover
+      operationId: discover
+      parameters:
+       -
+        name: profile-id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: account-number
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiscoverRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoverResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /tier/info:
+    get:
+      tags:
+       - Tier
+      summary: Returns card tiers
+      operationId: getCardTiers
+      parameters:
+       -
+        name: X-Source-System
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CardTier'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CardTier'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CardTier'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/verify-email:
+    post:
+      tags:
+       - Email Verification
+      summary: Verify Email
+      description: Verify Email
+      operationId: verifyEmail
+      parameters:
+       -
+        name: user-id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmailRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyEmailResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/resend-verification-email:
+    post:
+      tags:
+       - Email Verification
+      summary: Resend Verification Email
+      description: Resend Verification Email
+      operationId: resendVerificationEmail
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResendVerificationEmailRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResendVerificationEmailResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/search/recover-account-number:
+    post:
+      tags:
+       - Search
+      summary: Recover account number
+      description: Recover account number
+      operationId: recoverAccountNumber
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecoverAccountNumberRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecoverAccountNumberResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /profile/search/recover-account-number/send-email:
+    post:
+      tags:
+       - Search
+      summary: Send account number recovery email
+      description: Send account number recovery email
+      operationId: sendRecoverAccountNumberEmail
+      parameters:
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecoverAccountNumberRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEmailRecoverAccountNumberResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /location:
+    get:
+      tags:
+       - Location
+      summary: Get Location Details
+      description: Get Location Details
+      operationId: getLocationDetails
+      parameters:
+       -
+        name: line-of-business
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: region-code
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LocationDetail'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /location/{location-code}:
+    get:
+      tags:
+       - Location
+      summary: Get Location
+      description: Get Location
+      operationId: GetLocation
+      parameters:
+       -
+        name: location-code
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+       -
+        name: X-Correlation-ID
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationDetail'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+       -
+        default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false      
+  /location/nearby:
+    get:
+      tags:
+        - Location
+      summary: Get Nearby Location
+      description: Get Nearby Location
+      operationId: getNearbyLocation
+      parameters:
+        - name: longitude
+          in: query
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: number
+        - name: latitude
+          in: query
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: number
+        - name: radius
+          in: query
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: number
+        - name: limit
+          in: query
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: integer
+        - name: line-of-business
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: X-Correlation-ID
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationNearbyArrayDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - default: [ ]
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+          - oauth2
+        optional: false
+  /location/line-of-business:
+    get:
+      tags:
+        - Location
+      summary: Get All Location Line of Businesses
+      description: Get All Location Line of Businesses
+      operationId: getAllLocationLineOfBusinesses
+      parameters:
+        - name: X-Correlation-ID
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LineOfBusinessArrayDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - default: [ ]
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+          - oauth2
+        optional: false
+  /location/type:
+    get:
+      tags:
+        - Location
+      summary: Get All Location Types
+      description: Get All Location Types
+      operationId: getAllLocationTypes
+      parameters:
+        - name: X-Correlation-ID
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyTypeArrayDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - default: [ ]
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+          - oauth2
+        optional: false
+  /profile/{profile-id}/location/recommended-for-preferred:
+    get:
+      tags:
+        - Location
+      summary: Get Recommended Properties For Preferred Locations
+      description: Get Recommended Properties For Preferred Locations
+      operationId: getRecommendedLocationPropertiesForPreferredLocations
+      parameters:
+        - name: profile-id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: string
+        - name: X-Correlation-ID
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyCodeArrayDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - default: [ ]
+      x-auth-type: Application & Application User
+      x-throttling-tier: null
+      x-wso2-application-security:
+        security-types:
+          - oauth2
+        optional: false
+  /profile/{profile-id}/location/recommended-for-opt-in:
+      get:
+        tags:
+          - Location
+        summary: Get Recommended Locations For Opt-In
+        description: Get Recommended Locations For Opt-In
+        operationId: getRecommendedLocationsForOptin
+        parameters:
+          - name: profile-id
+            in: path
+            required: true
+            style: simple
+            explode: false
+            schema:
+              type: string
+              format: string
+          - name: X-Correlation-ID
+            in: header
+            required: false
+            style: simple
+            explode: false
+            schema:
+              type: string
+        responses:
+          200:
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/PropertyCodeArrayDto'
+          default:
+            description: Error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+        security:
+          - default: [ ]
+        x-auth-type: Application & Application User
+        x-throttling-tier: null
+        x-wso2-application-security:
+          security-types:
+            - oauth2
+          optional: false
+components:
+  schemas:
+    LocationDetail:
+      type: object
+      properties:
+        propertyLegalName:
+          type: string
+          nullable: true
+        propertyLongName:
+          type: string
+          nullable: true
+        propertyShortName:
+          type: string
+          nullable: true
+        currency:
+          type: string
+          nullable: true
+        localization:
+          type: string
+          nullable: true
+        timezone:
+          type: string
+          nullable: true
+        locations:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/LocationObject'
+    LocationObject:
+      type: object
+      properties:
+        locationCode:
+          type: string
+          nullable: true
+        locationLegalName:
+          type: string
+          nullable: true
+        locationLongName:
+          type: string
+          nullable: true
+        locationShortName:
+          type: string
+          nullable: true
+        displayOnDigital:
+          type: boolean
+          nullable: true
+        marketingEmail:
+          type: boolean
+          nullable: true
+        marketingDirectMail:
+          type: boolean
+          nullable: true
+        bookingUrl:
+          type: string
+          nullable: true
+        reservationDisclaimer:
+          type: string
+          nullable: true
+        appearOnVisitationMap:
+          type: boolean
+          nullable: true
+        brierleyParticipant:
+          type: boolean
+          nullable: true
+        favoriteLocation:
+          type: boolean
+          nullable: true
+        communicationPreferenceDisplay:
+          type: boolean
+          nullable: true
+        openDate:
+          type: string
+          format: date-time
+          nullable: true
+        closeDate:
+          type: string
+          format: date-time
+          nullable: true
+        unityParticipant:
+          type: boolean
+          nullable: true
+        webPage:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        lineOfBusiness:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/LineOfBusinessObject'
+        subLineOfBusiness:
+          type: string
+          nullable: true
+        categories:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Categories'
+        subCategories:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SubCategories'
+        venues:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Venues'  
+        locationType:
+          type: string
+          nullable: true
+        brand:
+          type: string
+          nullable: true
+        addressLine1:
+          type: string
+          nullable: true
+        addressLine2:
+          type: string
+          nullable: true
+        addressLine3:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        stateProvince:
+          type: string
+          nullable: true
+        stateCode:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        countryCode:
+          type: string
+          nullable: true  
+        postalCode:
+          type: string
+          nullable: true
+        fullAddress:
+          type: string
+          nullable: true
+        phoneNumber:
+          type: string
+          nullable: true
+        phoneCountryCode:
+          type: string
+          nullable: true
+        areaCode:
+          type: string
+          nullable: true
+        regionCode:
+          type: string
+          nullable: true
+        regionName:
+          type: string
+          nullable: true
+        latitude:
+          type: string
+          nullable: true
+        longitude:
+          type: string
+          nullable: true
+        locationStatus:
+          type: string
+          nullable: true
+        modifiedDate:
+          type: string          
+          format: date-time
+          nullable: true
+        socialMediaLinks:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SocialMedialLinkObject'
+        extensibilityFields:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ExtensibilityFields'    
+    SendEmailRecoverAccountNumberResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    LineOfBusinessObject:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+    Categories:
+      type: object
+      properties:
+        categoryShortName:
+          type: string
+          nullable: true
+        categoryName:
+          type: string
+          nullable: true
+    SubCategories:
+      type: object
+      properties:
+        categoryShortName: 
+          type: string
+          nullable: true
+        subcategoryShortName:
+          type: string
+          nullable: true
+        subCategoryName:
+          type: string 
+          nullable: true
+    Venues:
+      type: object
+      properties:
+        subcategoryShortName:
+          type: string
+          nullable: true
+        venueShortName:
+          type: string
+          nullable: true
+        venueName:
+          type: string
+          nullable: true      
+    SocialMedialLinkObject:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        displayName:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true    
+    ExtensibilityFields:
+      type: object
+      properties:
+        key:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true      
+    RecoverAccountNumberRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+        mobile:
+          type: string
+    RecoverAccountNumberResponse:
+      type: object
+      properties:
+        email:
+          type: string
+          example: pa***@shrss.com
+    PropertyDetailArrayDto:
+      type: array
+      nullable: true
+      items:
+        $ref: '#/components/schemas/PropertyDetailDto'
+    SocialMedia:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        displayName:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+      additionalProperties: false
+    LocationDto:
+      type: object
+      properties:
+        locationId:
+          type: integer
+          format: int32
+        digitalLocationId:
+          type: string
+          nullable: true
+        propertyCode:
+          type: string
+          nullable: true
+        locationName:
+          type: string
+          nullable: true
+        locationShortName:
+          type: string
+          nullable: true
+        lineOfBusiness:
+          type: string
+          nullable: true
+        subLineOfBusiness:
+          type: string
+          nullable: true
+        brand:
+          type: string
+          nullable: true
+        locationType:
+          type: string
+          nullable: true
+        addressLine1:
+          type: string
+          nullable: true
+        addressLine2:
+          type: string
+          nullable: true
+        addressLine3:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        stateProvince:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        postalCode:
+          type: string
+          nullable: true
+        phoneNumber:
+          type: string
+          nullable: true
+        phoneCountryCode:
+          type: string
+          nullable: true
+        areaCode:
+          type: string
+          nullable: true
+        regionCode:
+          type: string
+          nullable: true
+        regionName:
+          type: string
+          nullable: true
+        latitude:
+          type: string
+          nullable: true
+        longitude:
+          type: string
+          nullable: true
+        locationStatus:
+          type: string
+          nullable: true
+        displayOnDigital:
+          type: boolean
+          nullable: true
+        marketingEmail:
+          type: boolean
+          nullable: true
+        marketingDirectMail:
+          type: boolean
+          nullable: true
+        ibeBookingUrl:
+          type: string
+          nullable: true
+        modifiedDate:
+          type: string
+          format: date-time
+          nullable: true
+        propertyPrimaryLocation:
+          type: boolean
+          nullable: true
+        active:
+          type: boolean
+          nullable: true
+        openDate:
+          type: string
+          format: date-time
+          nullable: true
+        closeDate:
+          type: string
+          format: date-time
+          nullable: true
+        webPage:
+          type: string
+          nullable: true
+        faxNumber:
+          type: string
+          nullable: true
+        appearOnVisitationMap:
+          type: boolean
+          nullable: true
+        unityParticipant:
+          type: boolean
+          nullable: true
+        brierleyParticipant:
+          type: boolean
+          nullable: true
+        socialMediaLinks:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SocialMedia'
+      additionalProperties: false
+    PropertyDetailDto:
+      type: object
+      properties:
+        propertyId:
+          type: integer
+          format: int32
+        propertyName:
+          type: string
+          nullable: true
+        propertyEmail:
+          type: string
+          nullable: true
+        websiteUrl:
+          type: string
+          nullable: true
+        localization:
+          type: string
+          nullable: true
+        reportingCurrency:
+          type: string
+          nullable: true
+        propertyStatus:
+          type: string
+          nullable: true
+        timeZone:
+          type: string
+          nullable: true
+        active:
+          type: boolean
+          nullable: true
+        location:
+          nullable: true
+          allOf:
+           -
+            $ref: '#/components/schemas/LocationDto'
+      additionalProperties: false
+    EmailValidationResult:
+      type: object
+      properties:
+        email:
+          type: string
+          nullable: true
+        responseType:
+          type: string
+          nullable: true
+        responseDescription:
+          type: string
+          nullable: true
+        responseCode:
+          type: string
+          nullable: true
+        suggestedEmail:
+          type: string
+          nullable: true
+        suggestion:
+          type: string
+          nullable: true
+        errorResponse:
+          type: string
+          nullable: true
+        errorDescription:
+          type: string
+          nullable: true
+        id:
+          type: string
+          nullable: true
+    SignupResendConfirmEmailSuccess:
+      type: object
+      properties:
+        code:
+          example: unity-web-exp-s001
+        messsage:
+          example: Confirmation email is sent.
+        correlationId:
+          type: string
+    SignupConfirmSuccess:
+      type: object
+      properties:
+        code:
+          type: string
+        messsage:
+          example: Profile is confirmed and activated.
+        correlationId:
+          type: string
+    SignupConfirm:
+      type: object
+      properties:
+        code:
+          type: string
+        userId:
+          type: string
+    SignupProfile:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        mobile:
+          type: string
+        mobileCountryCode:
+          type: string
+        postalCode:
+          type: string
+        password:
+          type: string
+        dateOfBirth:
+          type: string
+        sourceLead:
+          type: string
+        consentTerms:
+          type: boolean
+        consentMarketing:
+          type: boolean
+          nullable: true
+    SignupProfileSuccess:
+      type: object
+      properties:
+        profileId:
+          type: string
+        userId:
+          type: string
+    ValidateExistingProfile:
+      type: object
+      properties:
+        email:
+          type: string
+    ValidateConfirmationCode:
+      type: object
+      properties:
+        code:
+          type: string
+        userId:
+          type: string
+    activateAccount:
+      type: object
+      properties:
+        userId:
+          type: string
+        code:
+          type: string
+        password:
+          type: string
+    ValidAccount:
+      type: object
+      properties:
+        profileId:
+          type: string
+        userId:
+          type: string
+    Email:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+          default: string
+        email:
+          type: string
+          nullable: true
+          default: string
+        verified:
+          type: integer
+          format: int32
+          nullable: true
+          default: 0
+        status:
+          type: string
+          nullable: true
+          default: string
+        emailOptInDate:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    Phone:
+      type: object
+      properties:
+        id:
+          type: string
+          default: string
+        phoneNumber:
+          type: string
+          nullable: true
+          default: string
+        countryCode:
+          type: string
+          nullable: true
+          default: string
+      additionalProperties: false
+    CompanyPreferences:
+      type: object
+      properties:
+        id:
+          type: string
+        companyCode:
+          maxLength: 20
+          minLength: 0
+          type: string
+          nullable: true
+        preferences:
+          $ref: '#/components/schemas/CompanyPropertyPreference'
+      additionalProperties: false
+    CompanyPreferencesForUpdate:
+      type: object
+      properties:
+        companyCode:
+          maxLength: 20
+          minLength: 0
+          type: string
+          nullable: true
+        preferences:
+          $ref: '#/components/schemas/CompanyPropertyPreference'
+      additionalProperties: false
+    PropertyPreference:
+      required:
+       - propertyCode
+       - sendEmail
+      type: object
+      properties:
+        propertyCode:
+          type: string
+        sendEmail:
+          type: string
+          nullable: true
+        modifiedDate:
+          type: string
+          format: date-time
+          nullable: true
+    CompanyPropertyPreference:
+      type: object
+      properties:
+        sendMail:
+          type: boolean
+          nullable: true
+        sendSMS:
+          type: boolean
+          nullable: true
+        properties:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/PropertyPreference'
+      additionalProperties: false
+    PropertyPreferenceRequest:
+      required:
+       - propertyCode
+      type: object
+      properties:
+        propertyCode:
+          type: string
+        sendMail:
+          type: boolean
+          nullable: true
+        sendEmail:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PropertyPreferenceResponse:
+      required:
+       - propertyCode
+      type: object
+      properties:
+        propertyCode:
+          type: string
+          nullable: true
+        sendMail:
+          type: boolean
+          nullable: true
+        sendEmail:
+          type: string
+          nullable: true
+        sendMailModifiedDate:
+          type: string
+          format: date-time
+          nullable: true
+        sendEmailModifiedDate:
+          type: string
+          format: date-time
+          nullable: true
+        modifiedDate:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    PropertyPreferenceRequestArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/PropertyPreferenceRequest'
+    PropertyPreferenceResponseArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/PropertyPreferenceResponse'
+    OnlinePreferencePreferredPropertiesRequest:
+      type: object
+      properties:
+        propertyCode:
+          type: string
+        isPreferred:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    OnlinePreferencePreferredPropertiesResponse:
+      type: object
+      properties:
+        propertyCode:
+          type: string
+          nullable: true
+        isPreferred:
+          type: boolean
+          nullable: true
+        modifiedDate:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    Address:
+      type: object
+      properties:
+        id:
+          type: string
+        addressLine1:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+        addressLine2:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+        city:
+          maxLength: 256
+          minLength: 0
+          type: string
+          nullable: true
+        stateProvince:
+          maxLength: 60
+          minLength: 0
+          type: string
+          nullable: true
+        postalCode:
+          maxLength: 20
+          minLength: 0
+          type: string
+          nullable: true
+        country:
+          maxLength: 60
+          minLength: 0
+          type: string
+          nullable: true
+      additionalProperties: false
+    AddressForUpdate:
+      type: object
+      properties:
+        addressLine1:
+          maxLength: 100
+          minLength: 0
+          type: string
+        addressLine2:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+        city:
+          maxLength: 256
+          minLength: 0
+          type: string
+          nullable: true
+        stateProvince:
+          maxLength: 60
+          minLength: 0
+          type: string
+          nullable: true
+        postalCode:
+          maxLength: 20
+          minLength: 0
+          type: string
+          nullable: true
+        country:
+          maxLength: 60
+          minLength: 0
+          type: string
+          nullable: true
+      additionalProperties: false
+    UnityPoint:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+        expiringBalance:
+          type: number
+          format: double
+        expiryDays:
+          type: number
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        offerType:
+          type: object
+          properties:
+            offerTypeName:
+              type: string
+              nullable: true
+            offerTypeShortName:
+              type: string
+              nullable: true
+    BookingInfo:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          type: string
+          format: date-time
+          nullable: true
+        confirmationNumber:
+          type: string
+          nullable: true
+        prizeQuantity:
+          type: string
+          nullable: true
+        guestCount:
+          type: string
+          nullable: true
+        selectedPrize:
+          $ref: '#/components/schemas/offerPrize'
+        selectedProperty:
+          $ref: '#/components/schemas/GetReservationResponseSelectedProperty'
+        selectedLocation:
+          type: object
+          properties:
+            subLocation:
+              type: string
+              nullable: true
+        selectedDate:
+          type: object
+          properties:
+            startDate:
+              type: string
+              format: date-time
+              nullable: true
+            endDate:
+              type: string
+              format: date-time
+              nullable: true
+        roomType:
+          type: string
+          nullable: true
+        checkIn:
+          type: string
+          nullable: true
+        checkOut:
+          type: string
+          nullable: true
+    GetReservationResponseSelectedProperty:
+      type: object
+      properties:
+        propertyCode:
+          type: string
+          nullable: true
+        region:
+          type: string
+          nullable: true
+        propertyLegalName:
+          type: string
+          nullable: true
+        propertyLongName:
+          type: string
+          nullable: true
+        propertyShortName:
+          type: string
+          nullable: true
+        propertyBookingPhoneNumber:
+          type: string
+          nullable: true
+        propertyDisclaimer:
+          type: string
+          nullable: true
+    offerPrize:
+      type: object
+      properties:
+        prizeId:
+          type: number
+          nullable: true
+        prizeName:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        cMPPrizeCode:
+          type: string
+          nullable: true
+        isDrawingOnly:
+          type: boolean
+          nullable: true
+        inventory:
+          type: number
+          nullable: true
+        awardedInventory:
+          type: string
+          nullable: true
+        redeemedInventory:
+          type: string
+          nullable: true
+        isPrimary:
+          type: boolean
+          nullable: true
+        bookingLimit:
+          type: number
+          nullable: true
+        isActive:
+          type: boolean
+          nullable: true
+    ReservationProperty:
+      type: object
+      properties:
+        propertyCode:
+          type: string
+        propertyName:
+          type: string
+        region:
+          type: string
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReservationLocation'
+    ReservationLocation:
+      type: object
+      properties:
+        location:
+          type: string
+        dates:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationDate'
+        useWaitList:
+          type: string
+        priority:
+          type: string
+        description:
+          type: string
+        bookingMethod:
+          type: string
+        bookingLink:
+          type: string
+        displayCallToAction:
+          type: string
+        ctaDescription:
+          type: string
+        requiresCheckIn:
+          type: string
+        bookableEndDate:
+          type: string
+          format: date-time
+        compDollars:
+          type: string
+        highestCompletedStep:
+          type: string
+        bookingLimit:
+          type: string
+        useOverBookForSeasons:
+          type: string
+        tierRestriction:
+          type: string
+        capacityType:
+          type: string
+        bookingQty:
+          type: string
+        bookingSelectedPrizeName:
+          type: string
+        guestCount:
+          type: string
+    GetAllOffersSuccess:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/GetOffersResponsePagination'
+        memberId:
+          type: string
+          nullable: true
+        offerList:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/OfferListItem'
+    GetOffersResponsePagination:
+      type: object
+      properties:
+        pageSize:
+          type: number
+          nullable: true
+        offSet:
+          type: number
+          nullable: true
+        sortField:
+          type: string
+          nullable: true
+        sortDirection:
+          type: string
+          nullable: true
+        totalRecords:
+          type: number
+          nullable: true
+    offerType:
+      type: object
+      properties:
+        offerTypeName:
+          type: string
+          nullable: true
+        offerTypeShortName: 
+          type: string
+          nullable: true
+    bookingMethod:
+      type: object
+      properties:
+        bookingMethodId:
+          type: string
+        bookingMethodName:
+          type: string
+    bookableStatus:
+      type: object
+      properties:
+        attendeeStatus:
+          type: boolean
+          nullable: true
+        primaryItemStatus:
+          type: string
+          nullable: true
+        backupStatus:
+          type: boolean
+          nullable: true
+        inventoryStatus:
+          type: boolean 
+          nullable: true
+    OfferListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        offerType: 
+          $ref: '#/components/schemas/offerType'
+        status:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          type: string
+          format: date-time
+          nullable: true
+        displayStartDate:
+          type: string
+          format: date-time
+          nullable: true
+        displayEndDate:
+          type: string
+          format: date-time
+          nullable: true
+        bookableStartDate:
+          type: string
+          format: date-time
+          nullable: true
+        bookableEndDate:
+          type: string
+          format: date-time
+          nullable: true
+        disclaimer:
+          type: string
+          nullable: true
+        fullyCommitted:
+          type: string
+          nullable: true
+        bookingLink:
+          type: string
+          nullable: true
+        bookingPhoneNumber:
+          type: string
+          nullable: true
+        bookingCaption:
+          type: string
+          nullable: true
+        bookingMethod:
+          $ref: '#/components/schemas/bookingMethod'
+        webLink: 
+          type: string
+          nullable: true
+        displayCallToAction:
+          type: string
+          nullable: true
+        displayOfferOnline:
+          type: string
+          nullable: true
+        displayLocation:
+          type: string
+          nullable: true
+        displayName:
+          type: string
+          nullable: true
+        offerCode:
+          type: string
+          nullable: true
+        bookableStatus:
+          $ref: '#/components/schemas/bookableStatus'  
+        segment:
+          $ref: '#/components/schemas/OfferListItemSegment'
+        properties:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SegmentProperty'
+    OfferListItemSegment:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          type: string
+          format: date-time
+          nullable: true
+        displayStartDate:
+          type: string
+          format: date-time
+          nullable: true
+        displayEndDate:
+          type: string
+          format: date-time
+          nullable: true
+        bookableStartDate:
+          type: string
+          format: date-time
+          nullable: true
+        bookableEndDate:
+          type: string
+          format: date-time
+          nullable: true
+        maximumPartySize:
+          type: string
+          nullable: true
+        maximumPrizeQuantity:
+          type: string
+          nullable: true
+        offerPrizes:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/offerPrize'
+    SegmentReservation:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+    SegmentProperty:
+      type: object
+      properties:
+        propertyCode:
+          type: string
+          nullable: true
+        propertyregion:
+          type: string
+          nullable: true
+        propertyLegalName:
+          type: string
+          nullable: true
+        propertyLongName:
+          type: string
+          nullable: true
+        propertyShortName:
+          type: string 
+          nullable: true
+        propertyAddress1:
+          type: string
+          nullable: true
+        propertyCity:
+          type: string
+          nullable: true
+        propertyState:
+          type: string
+          nullable: true
+        propertyCountry:
+          type: string 
+          nullable: true
+        propertyPostalCode:
+          type: string
+          nullable: true
+        region:
+          type: string
+          nullable: true
+        lineOfBusiness: 
+          type: string
+          nullable: true
+        locations:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/PropertyLocation'
+    PropertyLocation:
+      type: object
+      properties:
+        subLocation:
+          type: string
+          nullable: true
+        dates:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/LocationDate'
+            
+    LocationDate:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          type: string
+          format: date-time
+          nullable: true
+        eventPrizesInventory: 
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/offerPrizeForDate'
+    offerPrizeForDate:
+      type: object
+      properties:
+        prizeId: 
+          type: number
+          nullable: true
+        inventory: 
+          type: number
+          nullable: true
+        awardedInventory: 
+          type: string
+          nullable: true
+        redeemedInventory: 
+          type: string  
+          nullable: true
+    OfferListItemReservation:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+    GetOfferDetailsSuccess:
+      type: object
+      properties:
+        memberId:
+          type: string
+        offerDetail:
+          $ref: '#/components/schemas/OfferDetail'
+    OfferDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name: 
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        offerType:
+          $ref: '#/components/schemas/offerTypeObj'  
+        status: 
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          type: string
+          format: date-time 
+          nullable: true
+        displayStartDate:
+          type: string
+          format: date-time
+          nullable: true
+        displayEndDate:
+          type: string
+          format: date-time
+          nullable: true
+        bookableStartDate:
+          type: string
+          format: date-time
+          nullable: true
+        bookableEndDate:
+          type: string
+          format: date-time
+          nullable: true
+        disclaimer: 
+          type: string
+          nullable: true
+        fullyCommitted:
+          type: boolean
+          nullable: true
+        bookingLink:
+          type: string
+          nullable: true
+        bookingPhoneNumber:
+          type: string
+          nullable: true
+        bookingCaption:
+          type: string
+          nullable: true
+        bookingMethod:
+          $ref: '#/components/schemas/bookingmethod'
+        webLink:
+          type: string
+          nullable: true
+        displayCallToAction:
+          type: string
+          nullable: true
+        displayOfferOnline: 
+          type: string
+          nullable: true
+        displayLocation:
+          type: string
+          nullable: true
+        displayName:
+          type: string
+          nullable: true
+        offerCode:
+          type: string
+          nullable: true
+        bookableStatus:
+          type: object
+          properties:
+            attendeeStatus:
+              type: boolean
+              nullable: true
+            primaryItemStatus:
+              type: string
+              nullable: true
+            backupStatus:
+              type: boolean
+              nullable: true
+            inventoryStatus:
+              type: boolean
+              nullable: true
+        segment:
+          $ref: '#/components/schemas/Segment'
+        properties:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SegmentProperty'
+    offerTypeObj:
+      type: object
+      properties:
+        offerTypeName:
+          type: string
+          nullable: true
+        offerTypeShortName:
+          type: string
+          nullable: true
+    bookingmethod:
+      type: object
+      properties:
+        bookingMethodId:
+          type: string
+          nullable: true
+        bookingMethodName:
+          type: string
+          nullable: true
+    Segment:
+      type: object
+      properties:
+        id:
+          type: number
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        maximumPartySize:
+          type: string
+          nullable: true
+        maximumPrizeQuantity:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          type: string
+          format: date-time
+          nullable: true
+        displayStartDate:
+          type: string
+          format: date-time
+          nullable: true
+        displayEndDate:
+          type: string
+          format: date-time
+          nullable: true
+        bookableStartDate:
+          type: string
+          format: date-time
+          nullable: true
+        bookableEndDate:
+          type: string
+          format: date-time
+          nullable: true
+        offerPrizes:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/OfferPrize'
+    OfferPrize:
+      type: object
+      properties:
+        prizeId:
+          type: number
+          nullable: true
+        prizeName:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        cMPPrizeCode:
+          type: string
+          nullable: true
+        isDrawingOnly:
+          type: boolean
+          nullable: true
+        inventory:
+          type: number
+          nullable: true
+        awardedInventory:
+          type: number
+          nullable: true
+        redeemedInventory:
+          type: number
+          nullable: true
+        isPrimary:
+          type: boolean
+          nullable: true
+        bookingLimit:
+          type: number
+          nullable: true
+        isActive:
+          type: boolean
+          nullable: true
+    GetReservationSummaryResponse:
+      type: object
+      properties:
+        properties:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GetReservationSummaryResponseProperty'
+        reservationTypes:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GetReservationSummaryResponseReservationType'
+        linesOfBusiness:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GetReservationSummaryResponseLineOfBusiness'
+    GetReservationSummaryResponseProperty:
+      type: object
+      properties:
+        propertycode:
+          type: string
+          nullable: true
+        propertyregion:
+          type: string
+          nullable: true
+        propertyLegalName:
+          type: string
+          nullable: true
+        propertyLongName:
+          type: string
+          nullable: true
+        propertyShortName:
+          type: string
+          nullable: true
+        propertyAddress1:
+          type: string
+          nullable: true
+        propertyCity:
+          type: string
+          nullable: true
+        propertyState:
+          type: string
+          nullable: true
+        propertyCountry:
+          type: string
+          nullable: true
+        propertyPostalCode:
+          type: string
+          nullable: true
+        lineOfBusiness:
+          type: string
+          nullable: true
+        reservationCount:
+          type: number
+          nullable: true
+    GetReservationSummaryResponseReservationType:
+      type: object
+      properties:
+        reservationTypeName:
+          type: string
+          nullable: true
+        reservationTypeShortName:
+          type: string
+          nullable: true
+        reservationCount:
+          type: number
+          nullable: true
+    GetReservationSummaryResponseLineOfBusiness:
+      type: object
+      properties:
+        lineOfBusiness:
+          type: string
+          nullable: true
+        reservationCount:
+          type: number
+          nullable: true
+    GetAllReservationsSuccess:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/GetReservationsResponsePagination'
+        memberId:
+          type: string
+          nullable: true
+        reservationList:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Reservation'
+        status:
+          type: string
+          nullable: true
+        source:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          type: string
+          format: date-time
+          nullable: true
+        displayStartDate:
+          type: string
+          format: date-time
+          nullable: true
+        displayEndDate:
+          type: string
+          format: date-time
+          nullable: true
+        bookableStartDate:
+          type: string
+          format: date-time
+          nullable: true
+        bookableEndDate:
+          type: string
+          format: date-time
+          nullable: true
+        disclaimer:
+          type: string
+          nullable: true
+        fullyCommitted:
+          type: string
+          nullable: true
+        bookingLink:
+          type: string
+          nullable: true
+        bookingPhoneNumber:
+          type: string
+          nullable: true
+        bookingCaption:
+          type: string
+          nullable: true
+        bookingMethod:
+          $ref: '#/components/schemas/bookingMethod'
+        webLink:
+          type: string
+          nullable: true
+        ctaDescription:
+          type: string
+          nullable: true
+        displayCallToAction:
+          type: string
+          nullable: true
+        displayOfferOnline:
+          type: string
+          nullable: true
+        displayLocation:
+          type: string
+          nullable: true
+        displayName:
+          type: string
+          nullable: true
+        offerCode:
+          type: string
+          nullable: true
+        bookableStatus:
+          $ref: '#/components/schemas/bookableStatus'
+        bookingInfo:
+          $ref: '#/components/schemas/BookingInfo'
+        segment:
+          $ref: '#/components/schemas/OfferListItemSegment'
+        properties:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GetReservationResponseProperties'
+    GetReservationResponseProperties:
+      type: object
+      properties:
+        propertycode:
+          type: string
+          nullable: true
+        propertyregion:
+          type: string
+          nullable: true
+        propertyLegalName:
+          type: string
+          nullable: true
+        propertyLongName:
+          type: string
+          nullable: true
+        propertyShortName:
+          type: string
+          nullable: true
+        propertyAddress1:
+          type: string
+          nullable: true
+        propertyCity:
+          type: string
+          nullable: true
+        propertyState:
+          type: string
+          nullable: true
+        propertyCountry:
+          type: string
+          nullable: true
+        propertyPostalCode:   
+          type: string
+          nullable: true
+        locations:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GetOfferSummaryResponseLocation'
+    GetReservationsResponsePagination:
+      type: object
+      properties:
+        pageSize:
+          type: number
+          nullable: true
+        offset:
+          type: number
+          nullable: true
+        sortField:
+          type: string
+          nullable: true
+        sortDirection:
+          type: string
+          nullable: true
+        totalRecords:
+          type: number
+          nullable: true
+    OfferRequest:
+      type: object
+      properties:
+        memberOfferId:
+          type: string
+        selectedProperty:
+          type: object
+          properties:
+            propertyCode:
+              type: string
+            propertyName:
+              type: string
+            region:
+              type: string
+        selectedLocation:
+          type: object
+          properties:
+            subLocation:
+              type: string
+        selectedDate:
+          type: object
+          properties:
+            startDate:
+              type: string
+              format: date-time
+            endDate:
+              type: string
+              format: date-time
+        selectedPrize:
+          type: object
+          properties:
+            selectedPrizeId:
+              type: string
+            prizeQuantity:
+              type: number
+            guestCount:
+              type: number
+    RedeemOfferRequest:
+      type: object
+      properties:
+        memberOfferId:
+          type: string
+        confirmationNumber:
+          type: string
+        selectedProperty:
+          type: object
+          properties:
+            propertyCode:
+              type: string
+            propertyName:
+              type: string
+            region:
+              type: string
+        selectedLocation:
+          type: object
+          properties:
+            location:
+              type: string
+        selectedDate:
+          type: object
+          properties:
+            startDate:
+              type: string
+              format: date-time
+            endDate:
+              type: string
+              format: date-time
+        selectedPrize:
+          type: object
+          properties:
+            selectedPrizeId:
+              type: string
+            prizeQuantity:
+              type: number
+            guestCount:
+              type: number
+    OfferUnreserveRequest:
+      type: object
+      properties:
+        memberOfferId:
+          type: string
+        confirmationNumber:
+          type: string
+        selectedProperty:
+          type: object
+          properties:
+            propertyCode:
+              type: string
+            propertyName:
+              type: string
+            region:
+              type: string
+        selectedLocation:
+          type: object
+          properties:
+            subLocation:
+              type: string
+        selectedDate:
+          type: object
+          properties:
+            startDate:
+              type: string
+              format: date-time
+            endDate:
+              type: string
+              format: date-time
+        selectedPrize:
+          type: object
+          properties:
+            selectedPrizeId:
+              type: string
+            prizeQuantity:
+              type: number
+            guestCount:
+              type: number
+    GetOffersRequest:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/GetOffersRequestPagination'
+        searchParameters:
+          $ref: '#/components/schemas/GetOffersRequestSearchParameters'
+    GetOffersRequestPagination:
+      type: object
+      properties:
+        pageSize:
+          type: number
+        offSet:
+          type: number
+        sortField:
+          type: string
+        sortDescending:
+          type: string
+    GetOffersRequestSearchParameters:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        propertyCodes:
+          type: array
+          items:
+            type: string
+        region:
+          type: array
+          items:
+            type: string
+        offerType:
+          type: array
+          items:
+            type: string
+        lineOfBusiness:
+          type: array
+          items:
+            type: string   
+        topListingCount:
+          type: string
+    GetOfferSummaryRequest:
+      type: object
+      properties:
+        startDate:
+          type: string
+        endDate:
+          type: string
+        propertyCodes:
+          type: array
+          items:
+            type: string
+        regions:
+          type: array
+          items:
+            type: string
+        offerTypes:
+          type: array
+          items:
+            type: string
+        linesOfBusiness:
+          type: array
+          items:
+            type: string
+    GetOfferSummaryResponse:
+      type: object
+      properties:
+        properties:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GetOfferSummaryResponseProperty'
+        offerTypes:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GetOfferSummaryResponseOfferType'
+        linesOfBusiness:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GetOfferSummaryResponseLineOfBusiness'
+    GetReservationSummaryRequest:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        propertyCodes:
+          type: array
+          items:
+            type: string
+        regions:
+          type: array
+          items:
+            type: string
+        reservationTypes:
+          type: array
+          items:
+            type: string
+        linesOfBusiness:
+          type: array
+          items:
+            type: string
+    GetReservationsRequest:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/GetReservationsRequestPagination'
+        searchParameters:
+          $ref: '#/components/schemas/GetReservationsRequestSearchParameters'
+    GetReservationsRequestPagination:
+      type: object
+      properties:
+        pageSize:
+          type: number
+        offSet:
+          type: number
+        sortField:
+          type: string
+        sortDescending:
+          type: string
+    GetReservationsRequestSearchParameters:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        propertyCodes:
+          type: array
+          items:
+            type: string
+        regions:
+          type: array
+          items:
+            type: string
+        reservationTypes:
+          type: array
+          items:
+            type: string
+        linesOfBusiness:
+          type: array
+          items:
+            type: string
+        topListingCount:
+          type: string
+    GetOfferSummaryResponseOfferType:
+      type: object
+      properties: 
+        offerTypeName:
+          type: string
+          nullable: true
+        offerTypeShortName:
+          type: string
+          nullable: true
+        offerCount:
+          type: number
+          nullable: true
+    GetOfferSummaryResponseProperty:
+      type: object
+      properties:
+        propertyCode:
+          type: string
+          nullable: true
+        propertyregion:
+          type: string
+          nullable: true
+        propertyLegalName:
+          type: string
+          nullable: true
+        propertyLongName:
+          type: string
+          nullable: true
+        propertyShortName:
+          type: string
+          nullable: true
+        propertyAddress1:
+          type: string
+          nullable: true
+        propertyCity:
+          type: string
+          nullable: true
+        propertyState:
+          type: string
+          nullable: true
+        propertyCountry:
+          type: string
+          nullable: true
+        propertyPostalCode:   
+          type: string
+          nullable: true
+        lineOfBusiness:
+          type: string
+          nullable: true
+        offerCount:   
+          type: number
+          nullable: true
+
+    GetOfferSummaryResponseLocation:
+      type: object
+      properties:
+        subLocation:
+          type: string
+          nullable: true
+        dates:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GetOfferSummaryResponseDate'
+    GetOfferSummaryResponseDate:
+      type: object
+      properties:
+        startDate: 
+          type: string
+          nullable: true
+        endDate: 
+          type: string
+          nullable: true
+        eventPrizesInventory:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GetOfferSummaryResponseeventPrizesInventory'
+    GetOfferSummaryResponseeventPrizesInventory:
+      type: object
+      properties:
+        prizeId:
+          type: number
+          nullable: true
+        inventory:
+          type: number
+          nullable: true
+        awardedInventory:
+          type: string
+          nullable: true
+        redeemedInventory:
+          type: string
+          nullable: true
+    GetOfferSummaryResponseLineOfBusiness:
+      type: object
+      properties:
+        lineOfBusiness:
+          type: string
+          nullable: true
+        offerCount:
+          type: number
+          nullable: true
+    OfferResponse:
+      type: object
+      properties:
+        memberId:
+          type: string
+          nullable: true
+        confirmationNumber:
+          type: string
+          nullable: true
+        errorCode:
+          type: string
+          nullable: true
+        errorDescription:
+          type: string
+          nullable: true
+    TransactionHistoryRequest:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/TransactionHistoryRequestPagination'
+        searchParameters:
+          $ref: '#/components/schemas/TransactionHistoryRequestSearchParameters'
+    TransactionHistoryRequestPagination:
+      type: object
+      properties:
+        pageSize:
+          type: number
+        offSet:
+          type: number
+        sortField:
+          type: string
+        sortDescending:
+          type: boolean
+    TransactionHistoryRequestSearchParameters:
+      type: object
+      properties:
+        startDate:
+          type: string
+        endDate:
+          type: string
+        propertyCode:
+          type: array
+          items:
+            type: string
+        lineOfBusiness:
+          type: array
+          items:
+            type: string
+        transactionType:
+          type: array
+          items:
+            type: string
+    TransactionHistoryResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/TransactionHistoryResponsePagination'
+        transactions:
+          $ref: '#/components/schemas/TransactionHistoryResponseData'
+    TransactionHistoryResponseData:
+      type: array
+      xml:
+        name: expirings
+        wrapped: true
+      items:
+        properties:
+          propertyCode:
+            type: string
+          id:
+            type: string
+          lineOfBusiness:
+            type: string
+          startDateTime:
+            type: string
+          endDateTime:
+            type: string
+          earnedTierCredits:
+            type: number
+          earnedPoints:
+            type: number
+          redeemedPoints:
+            type: number
+          earnedFreePlay:
+            type: number
+          pendingFreePlay:
+            type: number
+          pendingFreePlayDate:
+            type: string
+          expiredFreePlay:
+            type: number
+          redeemedFreePlay:
+            type: number
+          tripDays:
+            type: string
+    TransactionHistoryResponsePagination:
+      type: object
+      properties:
+        pageSize:
+          type: number
+        offset:
+          type: number
+        sortField:
+          type: string
+        sortDirection:
+          type: string
+        totalRecords:
+          type: number
+    TransactionHistorySummaryRequest:
+      type: object
+      properties:
+        startDate:
+          type: string
+        endDate:
+          type: string
+        propertyCode:
+          type: array
+          items:
+            type: string
+        lineOfBusiness:
+          type: array
+          items:
+            type: string
+        transactionType:
+          type: array
+          items:
+            type: string
+    TransactionHistorySummaryResponse:
+      type: object
+      properties:
+        propertyCodes:
+          type: array
+          xml:
+            name: expirings
+            wrapped: true
+          items:
+            type: string
+        linesOfBusiness:
+          type: array
+          xml:
+            name: expirings
+            wrapped: true
+          items:
+            type: string
+        transactionTypes:
+          type: array
+          xml:
+            name: expirings
+            wrapped: true
+          items:
+            type: string
+    FreePlay:
+      type: object
+      properties:
+        summary:
+          type: object
+          properties:
+            totalAvailableAmount:
+              type: string
+        balances:
+          type: array
+          xml:
+            name: expirings
+            wrapped: true
+          items:
+            properties:
+              propertyCode:
+                type: string
+              totalFreePlayAmountEarned:
+                type: string
+              totalUsedAmount:
+                type: string
+              totalAvailableAmount:
+                type: string
+              totalNextExpiringAmount:
+                type: string
+              daysToNextExpiration:
+                type: string
+    Profile:
+      type: object
+      properties:
+        profileId:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+          nullable: true
+        middleName:
+          type: string
+          nullable: true
+        lastName:
+          type: string
+          nullable: true
+        gender:
+          type: string
+          nullable: true
+        nickname:
+          type: string
+          nullable: true
+        dateOfBirth:
+          type: string
+          format: date-time
+          nullable: true
+        language:
+          type: string
+          nullable: true
+        unityEnrolledDate:
+          type: string
+          format: date-time
+          nullable: true
+        pastLoyaltyEnrolledDate:
+          type: string
+          format: date-time
+          nullable: true
+        pastLoyaltyProgram:
+          type: string
+          nullable: true
+        account:
+          $ref: '#/components/schemas/Account'
+        tier:
+          $ref: '#/components/schemas/Tier'
+        primaryEmail:
+          $ref: '#/components/schemas/Email'
+        homePhone:
+          $ref: '#/components/schemas/Phone'
+        workPhone:
+          $ref: '#/components/schemas/Phone'
+        mobilePhone:
+          $ref: '#/components/schemas/Phone'
+        homeAddress:
+          $ref: '#/components/schemas/Address'
+        alternateAddress:
+          $ref: '#/components/schemas/Address'
+        propertyProfile:
+          $ref: '#/components/schemas/ProfilePropertyArray'
+    PreferenceResponse:
+      type: object
+      properties:
+        communicationPreference:
+          type: object
+          properties:
+            global:
+              type: object
+              properties:
+                sendMailTo:
+                  type: string
+                unityHardRock:
+                  $ref: '#/components/schemas/SubscriberPreferenceResponse'
+                casinos:
+                  $ref: '#/components/schemas/SubscriberPreferenceResponse'
+                cafes:
+                  $ref: '#/components/schemas/SubscriberPreferenceResponse'
+                hotels:
+                  $ref: '#/components/schemas/SubscriberPreferenceResponse'
+                rockShop:
+                  $ref: '#/components/schemas/SubscriberPreferenceResponse'
+              additionalProperties: false
+            properties:
+              $ref: '#/components/schemas/PropertyPreferenceResponseArray'
+          additionalProperties: false
+        onlinePreference:
+          type: object
+          properties:
+            preferredProperties:
+              type: array
+              items:
+                $ref: '#/components/schemas/OnlinePreferencePreferredPropertiesResponse'
+      additionalProperties: false
+    PreferenceRequest:
+      type: object
+      properties:
+        communicationPreference:
+          type: object
+          properties:
+            global:
+              type: object
+              properties:
+                sendMailTo:
+                  type: string
+                unityHardRock:
+                  $ref: '#/components/schemas/SubscriberPreferenceRequest'
+                casinos:
+                  $ref: '#/components/schemas/SubscriberPreferenceRequest'
+                cafes:
+                  $ref: '#/components/schemas/SubscriberPreferenceRequest'
+                hotels:
+                  $ref: '#/components/schemas/SubscriberPreferenceRequest'
+                rockShop:
+                  $ref: '#/components/schemas/SubscriberPreferenceRequest'
+              additionalProperties: false
+            properties:
+              $ref: '#/components/schemas/PropertyPreferenceRequestArray'
+          additionalProperties: false
+        onlinePreference:
+          type: object
+          properties:
+            preferredProperties:
+              type: array
+              items:
+                $ref: '#/components/schemas/OnlinePreferencePreferredPropertiesRequest'
+      additionalProperties: false
+    SubscriberPreferenceRequest:
+      type: object
+      properties:
+        sendMail:
+          type: boolean
+          nullable: true
+        sendEmail:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SubscriberPreferenceResponse:
+      type: object
+      properties:
+        sendMail:
+          type: boolean
+          nullable: true
+        sendEmail:
+          type: string
+          nullable: true
+        modifiedDate:
+          type: string
+          format: date-time
+      additionalProperties: false
+    UpdatePersonalInformation:
+      type: object
+      properties:
+        primaryEmail:
+          type: object
+          properties:
+            email:
+              type: string
+              nullable: true
+        homePhone:
+          type: object
+          properties:
+            phoneNumber:
+              type: string
+              nullable: true
+            countryCode:
+              type: string
+              nullable: true
+        mobilePhone:
+          type: object
+          properties:
+            phoneNumber:
+              type: string
+              nullable: true
+            countryCode:
+              type: string
+              nullable: true
+        language:
+          type: string
+          nullable: true
+        homeAddress:
+          $ref: '#/components/schemas/AddressForUpdate'
+        alternateAddress:
+          $ref: '#/components/schemas/AddressForUpdate'
+    OnlineAccountUpdateDto:
+      type: object
+      properties:
+        password:
+          type: object
+          properties:
+            accountNumber:
+              type: string
+            currentPassword:
+              type: string
+            newPassword:
+              type: string
+          additionalProperties: false
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+    SignupError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+        email:
+          type: string
+        userId:
+          type: string
+    SignupErrorUserExists:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+        email:
+          type: string
+    SignupErrorUserPendingActivation:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+        userId:
+          type: string
+    Account:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          nullable: true
+          default: string
+        mergedToAccountNumber:
+          type: string
+          nullable: true
+          default: string
+        activationSource:
+          type: string
+          nullable: true
+          default: string
+        sourceLead:
+          type: string
+          nullable: true
+          default: string
+        creditType:
+          type: string
+          nullable: true
+          default: string
+        accountStatus:
+          type: string
+          nullable: true
+          default: string
+        playerType:
+          type: string
+          nullable: true
+          default: string
+        registrationDate:
+          type: string
+          nullable: true
+          default: string
+        activationDate:
+          type: string
+          nullable: true
+          default: string
+        accountType:
+          type: string
+          nullable: true
+          default: string
+        registrationSource:
+          type: string
+          nullable: true
+          default: string
+        predominantPropertyCode:
+          type: string
+          nullable: true
+        globalRank:
+          type: string
+          nullable: true
+        globalValuationScore:
+          type: number
+          format: double
+          nullable: true
+        casinoIdentityVerified:
+          type: boolean
+          nullable: true
+    Tier:
+      type: object
+      properties:
+        lineOfBusiness:
+          type: string
+          nullable: true
+        tierCode:
+          type: integer
+          format: int32
+          nullable: true
+        tierCredits:
+          type: integer
+          format: int32
+          nullable: true
+        tierStartDate:
+          type: string
+          format: date-time
+          nullable: true
+        tierEndDate:
+          type: string
+          format: date-time
+          nullable: true
+        tierEarningsExpiration:
+          type: string
+          format: date-time
+          nullable: true
+        tierPointsToMaintain:
+          type: integer
+          format: int32
+          nullable: true
+        nextTierCode:
+          type: integer
+          format: int32
+          nullable: true
+        nextTierDescription:
+          type: string
+          nullable: true
+        nextTierCredits:
+          type: integer
+          format: int64
+          nullable: true
+        currentTierMatch:
+          type: boolean
+          nullable: true
+        pastTierMatch:
+          type: boolean
+          nullable: true
+        tierMatchThresholdPoints:
+          type: integer
+          format: int32
+          nullable: true
+        totalCreditsToNextTier:
+          type: integer
+          format: int64
+          nullable: true
+        currentCreditsToNextTier:
+          type: integer
+          format: int32
+          nullable: true
+        tierDescription:
+          type: string
+          nullable: true
+        firstTierGoal:
+          type: string
+          nullable: true
+        firstTierGoalPoints:
+          type: integer
+          format: int32
+          nullable: true
+        secondTierGoal:
+          type: string
+          nullable: true
+        secondTierGoalPoints:
+          type: integer
+          format: int32
+          nullable: true
+        firstTierGoalCode:
+          type: integer
+          format: int32
+          nullable: true
+        secondTierGoalCode:
+          type: integer
+          format: int32
+          nullable: true
+    ProfileProperty:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+          default: string
+        propertyCode:
+          type: string
+          nullable: true
+          default: string
+        valuationScore:
+          type: number
+          format: double
+          nullable: true
+        rank:
+          type: string
+          nullable: true
+        casinoIdentityVerified:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    ProfilePropertyArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileProperty'
+    Subscription:
+      type: object
+      properties:
+        companyCode:
+          type: string
+          nullable: true
+        subscriptionTypeCode:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          type: boolean
+      additionalProperties: false
+    GetWalletAccessToken:
+      type: object
+      properties:
+        accessToken:
+          type: string
+    GetWalletBalance:
+      type: object
+      properties:
+        walletId:
+          type: string
+        balance:
+          type: number
+        limit:
+          type: number
+        lastUpdate:
+          type: string
+    HasWallet:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+    RefreshContentResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+    GetPatronDataForWallet:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+        phoneNumber:
+          type: string
+        email:
+          type: string
+        gender:
+          type: string
+        pinNumber:
+          type: string
+        address:
+          type: object
+          properties:
+            address:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            postalCode:
+              type: string
+            country:
+              type: string
+        identity:
+          type: object
+          properties:
+            identityType:
+              type: string
+            identityNumber:
+              type: string
+            issuedByState:
+              type: string
+            issuedByCountry:
+              type: string
+            issuedDate:
+              type: string
+            expiryDate:
+              type: string
+            idValidatedDate:
+              type: string
+        identityToken:
+          type: string
+        payloadSignature:
+          type: string
+    ProblemDetails:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+    CountryResponseDto:
+      type: object
+      properties:
+        countryCode:
+          type: string
+          nullable: true
+        countryName:
+          type: string
+          nullable: true
+        countryCallingCode:
+          type: string
+          nullable: true
+        currencyCode:
+          type: string
+          nullable: true
+        sortOrder:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    StateResponseDto:
+      type: object
+      properties:
+        stateId:
+          type: integer
+          format: int32
+        stateCode:
+          type: string
+          nullable: true
+        stateName:
+          type: string
+          nullable: true
+        sortOrder:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    AccountActivationSuccess:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+    CountryResponseArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/CountryResponseDto'
+    StateResponseArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/StateResponseDto'
+    PropertyNearbyArrayDto:
+      type: array
+      nullable: true
+      items:
+        $ref: '#/components/schemas/PropertyNearbyDto'
+    PropertyNearbyDto:
+      type: object
+      properties:
+        propertyCode:
+          type: string
+          nullable: true
+        locationName:
+          type: string
+          nullable: true
+        distanceInMiles:
+          type: integer
+          format: int32
+          nullable: true
+    LocationNearbyArrayDto:
+      type: array
+      nullable: true
+      items:
+        $ref: '#/components/schemas/LocationNearbyDto'
+    LocationNearbyDto:
+      type: object
+      properties:
+        locationName:
+          type: string
+          nullable: true
+        locationCode:
+          type: string
+          nullable: true
+        distanceInMiles:
+          type: integer
+          format: int32
+          nullable: true
+    PropertyCodeDto:
+      type: object
+      properties:
+        propertyCode:
+          type: string
+          nullable: true
+    PropertyCodeArrayDto:
+      type: array
+      nullable: true
+      items:
+        $ref: '#/components/schemas/PropertyCodeDto'
+    RegionArrayDto:
+      type: array
+      nullable: true
+      items:
+        $ref: '#/components/schemas/RegionDto'
+    RegionDto:
+      type: object
+      properties:
+        regionCode:
+          type: string
+          nullable: true
+        regionName:
+          type: string
+          nullable: true
+        numberOfProperties:
+          type: integer
+          format: int32
+          nullable: true
+    PropertyTypeArrayDto:
+      type: array
+      nullable: true
+      items:
+        $ref: '#/components/schemas/PropertyTypeDto'
+    PropertyTypeDto:
+      type: object
+      properties:
+        propertyType:
+          type: string
+          nullable: true
+    LineOfBusinessArrayDto:
+      type: array
+      nullable: true
+      items:
+        $ref: '#/components/schemas/LineOfBusinessDto'
+    LineOfBusinessDto:
+      type: object
+      properties:
+        lineOfBusiness:
+          type: string
+          nullable: true
+        sublineOfBusiness:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SubLineOfBusinessDto'
+    SubLineOfBusinessDto:
+      type: object
+      properties:
+        sublineOfBusiness:
+          type: string
+          nullable: true
+    Statement:
+      type: string
+      format: byte
+    DiscoverRequest:
+      type: object
+      properties:
+        startDate:
+          type: string
+          nullable: true
+        endDate:
+          type: string
+          nullable: true
+        propertyCode:
+          type: string
+          nullable: true
+        lineOfBusiness:
+          type: string
+          nullable: true
+    DiscoverResponse:
+      type: object
+      properties:
+        patronTotalVerifiedVisits:
+          type: string
+          nullable: true
+        patronTotalVisitedProperties:
+          type: string
+          nullable: true
+        propertyVisits:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/PropertyVisits'
+    PropertyVisits:
+      type: object
+      properties:
+        propertyCode:
+          type: string
+          nullable: true
+        propertyName:
+          type: string
+          nullable: true
+        lineOfBusiness:
+          type: string
+          nullable: true
+        totalVerifiedVisits:
+          type: string
+          nullable: true
+        lastVerifiedVisitDate:
+          type: string
+          nullable: true
+    VerifyEmailRequest:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          nullable: true
+        emailOTP:
+          type: string
+          nullable: true
+    VerifyEmailResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        correlationId:
+          type: string
+          nullable: true
+    ResendVerificationEmailRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+          nullable: true
+    ResendVerificationEmailResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        correlationId:
+          type: string
+          nullable: true
+    CardTier:
+      required:
+       - description
+      type: object
+      properties:
+        tierCode:
+          type: integer
+          format: int32
+        description:
+          maxLength: 50
+          minLength: 0
+          type: string
+        tierMin:
+          type: integer
+          format: int32
+          nullable: true
+        tierMax:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    GetLocationByCode:
+      type: object
+      properties:
+        propertyId:
+          type: integer
+          format: int32
+        propertyLegalName:
+          type: string
+          nullable: true
+        propertyLongName:
+          type: string
+          nullable: true
+        propertyShortName:
+          type: string
+          nullable: true
+        currency:
+          type: string
+          nullable: true
+        localization:
+          type: string
+          nullable: true
+        timeZone:
+          type: string
+          nullable: true
+        location:
+          type: object
+          properties:
+            locationId:
+              type: integer
+              format: int32
+            locationCode:
+              type: string
+              nullable: true
+            locationLegalName:
+              type: string
+              nullable: true
+            locationLongname:
+              type: string
+              nullable: true
+            locationShortName:
+              type: string
+              nullable: true
+            displayOnDigital:
+              type: boolean
+              nullable: true
+            marketingEmail:
+              type: boolean
+              nullable: true
+            marketingDirectMail:
+              type: boolean
+              nullable: true
+            bookingUrl:
+              type: string
+              nullable: true
+            reservationDisclaimer:
+              type: string
+              nullable: true
+            appearOnVisitationMap:
+              type: boolean
+              nullable: true
+            brierleyParticipant:
+              type: boolean
+              nullable: true
+            favoriteLocation:
+              type: boolean
+              nullable: true
+            communicationPreferenceDisplay:
+              type: boolean
+              nullable: true
+            openDate:
+              type: string
+              format: date-time
+              nullable: true
+            closeDate:
+              type: string
+              format: date-time
+              nullable: true
+            unityParticipant:
+              type: boolean
+              nullable: true
+            webPage:
+              type: string
+              nullable: true
+            email:
+              type: string
+              nullable: true
+            lineOfBusiness:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/LineOfBusiness'
+            subLineOfBusiness:
+              type: string
+              nullable: true
+            locationType:
+              type: string
+              nullable: true
+            brand:
+              type: string
+              nullable: true
+            addressLine1:
+              type: string
+              nullable: true
+            addressLine2:
+              type: string
+              nullable: true
+            addressLine3:
+              type: string
+              nullable: true
+            city:
+              type: string
+              nullable: true
+            stateProvince:
+              type: string
+              nullable: true
+            stateCode:
+              type: string
+              nullable: true
+            country:
+              type: string
+              nullable: true
+            postalCode:
+              type: string
+              nullable: true
+            phoneNumber:
+              type: string
+              nullable: true
+            phoneCountryCode:
+              type: string
+              nullable: true
+            areaCode:
+              type: string
+              nullable: true
+            regionCode:
+              type: string
+              nullable: true
+            regionName:
+              type: string
+              nullable: true
+            latitude:
+              type: number
+              nullable: true
+            longitude:
+              type: number
+              nullable: true
+            locationStatus:
+              type: string
+              nullable: true
+            modifiedDate:
+              type: string
+              format: date-time
+              nullable: true
+            socialMediaLinks:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/SocialMediaLinks'
+    LineOfBusiness:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+    SocialMediaLinks:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        displayName:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+    DefaultGlobalPreferenceResponse:
+      type: object
+      properties:
+        preferences:
+          properties:
+            communicationPreference:
+              properties: 
+                global: 
+                  properties: 
+                    unityHardRock:
+                      $ref: '#/components/schemas/sendMailEmail'
+                      nullable: true
+                    casinos:
+                      $ref: '#/components/schemas/sendMailEmail'
+                      nullable: true
+                    cafes:
+                      $ref: '#/components/schemas/sendMailEmail'
+                      nullable: true
+                    hotels:
+                      $ref: '#/components/schemas/sendMailEmail'
+                      nullable: true
+                    rockShop:
+                      $ref: '#/components/schemas/sendMailEmail'
+                      nullable: true
+    sendMailEmail:
+      type: object
+      properties:
+        sendEmail: 
+          type: boolean
+          nullable: true
+        sendMail: 
+          type: boolean
+          nullable: true 
+  securitySchemes:
+    default:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://test.com
+          scopes: {}
+x-wso2-auth-header: Authorization
+x-wso2-cors:
+  corsConfigurationEnabled: false
+  accessControlAllowOrigins:
+   - '*'
+  accessControlAllowCredentials: false
+  accessControlAllowHeaders:
+   - authorization
+   - Access-Control-Allow-Origin
+   - Content-Type
+   - SOAPAction
+  accessControlAllowMethods:
+   - GET
+   - PUT
+   - POST
+   - DELETE
+   - PATCH
+   - OPTIONS
+x-wso2-production-endpoints:
+  urls:
+   - https://unity-ei-dev.shrss.com/unity-web-exp/v1
+  type: http
+x-wso2-sandbox-endpoints:
+  urls:
+   - https://unity-ei-dev.shrss.com/unity-web-exp/v1
+  type: http
+x-wso2-basePath: /unity-web-exp/v1
+x-wso2-transports:
+ - https
+x-wso2-response-cache:
+  enabled: false
+  cacheTimeoutInSeconds: 300
