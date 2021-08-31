@@ -24,6 +24,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: Update the Version for Swagger.yaml
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          valueFile: 'dist/swagger.yaml'
+          propertyPath: 'info.version'
+          value: ${{ github.run_id }}
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
         with:
@@ -33,9 +39,3 @@ jobs:
          port: 22
          source: "dist/Swagger.yaml"
          target: "/root/HardRock"
-      - name: Update the Version for Swagger.yaml
-        uses: fjogeleit/yaml-update-action@master
-        with:
-          valueFile: 'dist/swagger.yaml'
-          propertyPath: 'info.version'
-          value: ${{ github.run_id }}
