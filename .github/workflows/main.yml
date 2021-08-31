@@ -33,3 +33,9 @@ jobs:
          port: 22
          source: "dist/Swagger.yaml"
          target: "/root/HardRock"
+      - name: Update the Version for Swagger.yaml
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          valueFile: 'dist/swagger.yaml'
+          propertyPath: 'info.version'
+          value: ${{ github.run_id }}
