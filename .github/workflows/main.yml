@@ -23,11 +23,9 @@ jobs:
     # Steps represent a sequence of tasks ppthat will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it ok
-    - uses: actions/checkout@v2
-    - name: Update the Version for Swagger.yaml
-    - run : echo "${{ secrets.SWAGGERCHANGED }}"
-           
-   
+    - uses: actions/checkout@v2      
+    - name: script
+      run: PATH/script.sh
 
 
 
