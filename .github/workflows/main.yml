@@ -31,7 +31,8 @@ jobs:
            azure-pipeline-name: 'DevOpsDemo-CI' 
            azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
            azure-pipeline-variables:SWAGGERCHANGED: "false"
-           azure-pipeline-variables: '{ "SWAGGERCHANGED": "false" }'
+           azure-pipeline-variables:
+              '{"SWAGGERCHANGED": "false" }'
    
 
 
