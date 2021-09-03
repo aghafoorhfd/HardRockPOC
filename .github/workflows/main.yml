@@ -24,14 +24,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it ok
     - uses: actions/checkout@v2
-    - name: Call Azure Pipeline
-      uses: Azure/pipelines@v1
-      with:
-           azure-devops-project-url: 'https://dev.azure.com/MyOZ/HelloDevOps'
-           azure-pipeline-name: 'DevOpsDemo-CI'
-           azure-pipeline-variables:
-              '{"SWAGGERCHANGED": "false" }'
-           azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
+    - name: Update the Version for Swagger.yaml
+    - run : echo "${{ secrets.SWAGGERCHANGED }}"
            
    
 
