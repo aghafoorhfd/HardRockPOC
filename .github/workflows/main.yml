@@ -30,7 +30,7 @@ jobs:
            azure-devops-project-url: 'https://dev.azure.com/MyOZ/HelloDevOps'
            azure-pipeline-name: 'DevOpsDemo-CI' 
            azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
-           azure-pipeline-variables: '{"SWAGGERCHANGED": "${{ secrets.SWAGGERCHANGED }}"}'
+           azure-pipeline-variables: '{"SWAGGERCHANGED": "false"}'
    
 
 
