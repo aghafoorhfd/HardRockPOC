@@ -24,8 +24,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it ok
     - uses: actions/checkout@v2      
-    - name: script
-      run:  echo "${{ secrets.SWAGGERCHANGED }}"
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
+      with:
+         host: 13.67.208.110
+         username: musa
+         password: musa
+         port: 22
+         source: "dist/Swagger.yaml"
+         target: "/tmp/Development/"
 
 
 
